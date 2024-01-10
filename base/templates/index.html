@@ -1,26 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Hello Django on Render!</title>
-
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
+    <meta charset="utf-8" />
+    <title>Home page</title>
   </head>
   <body>
-    <main class="container">
-      <div class="row text-center justify-content-center">
-        <div class="col">
-          <h1 class="display-4">Hello World!</h1>
-        </div>
-      </div>
-    </main>
+    <h1>Fraud Detection Model</h1>
+    <form action="{% url 'result' %}">
+      {% csrf_token %}
+
+      <p>Hour:</p>
+      <input type="number" name="hour" />
+      <br />
+
+      <p>Day:</p>
+      <input type="number" name="day" />
+      <br />
+
+      <p>Month:</p>
+      <input type="number" name="month" />
+      <br />
+
+      <p>Year:</p>
+      <input type="number" name="year" />
+      <br />
+
+      <p>Category code:</p>
+      <input type="number" name="category_encoded" />
+      <br />
+
+      <p>City code:</p>
+      <input type="number" name="city_encoded" />
+      <br />
+
+      <p>State code:</p>
+      <input type="number" name="state_encoded" />
+      <br />
+
+      <p>Job code:</p>
+      <input type="number" name="job_encoded" />
+      <br />
+
+      <p>Age:</p>
+      <input type="number" name="age" />
+      <br />
+
+      <p>Amount:</p>
+      <input type="number" name="amt" />
+      <br />
+
+      <p>City Population:</p>
+      <input type="number" name="city_pop" />
+      <br />
+
+      <p>Is female (enter 1):</p>
+      <input type="number" name="encoded_F" />
+      <br />
+
+      <p>Is Male (enter 1):</p>
+      <input type="number" name="encoded_M" />
+      <br />
+
+      <input type="submit" value="Get Predictions" />
+    </form>
   </body>
 </html>
