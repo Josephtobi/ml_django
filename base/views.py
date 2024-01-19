@@ -10,12 +10,12 @@ model_path = os.path.join(pickle_models_folder, 'fraud_detect.sav')
 scaler_path = os.path.join(pickle_models_folder, 'scaler.sav')
 
 
-def getPredictions(hour, day, month, year, category_encoded, city_encoded, state_encoded, job_encoded, age, amt, city_pop, encoded_F, encoded_M):
+def getPredictions(hour, day, month, year, merchant_encoded, category_encoded, city_encoded, state_encoded, job_encoded, age, amt, city_pop, encoded_F, encoded_M):
     import pickle
     model = pickle.load(open(model_path, "rb"))
     scaler = pickle.load(open(scaler_path, "rb"))
     prediction = model.predict(scaler.transform(
-        [[hour, day, month, year, category_encoded, city_encoded, state_encoded, job_encoded, age, amt, city_pop, encoded_F, encoded_M]]))
+        [[hour, day, month, year, merchant_encoded, category_encoded, city_encoded, state_encoded, job_encoded, age, amt, city_pop, encoded_F, encoded_M]]))
 
     if prediction == 0:
         return "Fraudulent Transaction detected"
@@ -34,6 +34,7 @@ def result(request):
     day = int(request.GET['day'])
     month = int(request.GET['month'])
     year = int(request.GET['year'])
+    merchant_encoded = int(request.GET['merchant_encoded'])
     category_encoded = int(request.GET['category_encoded'])
     city_encoded = int(request.GET['city_encoded'])
     state_encoded = int(request.GET['state_encoded'])
@@ -44,7 +45,7 @@ def result(request):
     encoded_F = int(request.GET['encoded_F'])
     encoded_M = int(request.GET['encoded_M'])
 
-    result = getPredictions(hour, day, month, year, category_encoded, city_encoded,
+    result = getPredictions(hour, day, month, year, merchant_encoded, category_encoded, city_encoded,
                             state_encoded, job_encoded, age, amt, city_pop, encoded_F, encoded_M)
 
     return render(request, 'result.html', {'result': result})
